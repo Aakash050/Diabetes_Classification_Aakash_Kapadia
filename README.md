@@ -19,7 +19,7 @@ EDA → split → pipeline (false zeros → NaNs, impute, scale) → model compa
 - Recall: **0.741**  
 - F1: **0.667**
 
-**Validation:** 5-fold CV AUC on train = **0.841**; test AUC ≈ **0.817–0.818** → small gap ⇒ **limited overfitting**.
+**Validation:** 5-fold CV AUC on train = **0.841**; test AUC ≈ **0.817–0.818** → small gap -> **limited overfitting**.
 
 > **Which to choose?**  
 > - For overall discrimination (ranking): pick **baseline RF** (slightly higher AUC).  
