@@ -1,0 +1,10 @@
+name: diabetes-ml
+channels: [conda-forge, defaults]
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - scipy
