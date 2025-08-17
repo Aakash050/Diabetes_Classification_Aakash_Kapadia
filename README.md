@@ -1,24 +1,41 @@
-Diabetes Prediction README: 
-I predicted the likelihood of diabetes from different factors, such as glucose, BMI, and more, using a leakage proof workflow, achieving a recall of around 75%. 
+# Diabetes Prediction — Leakage-Safe ML Pipeline
 
-My pipeline was EDA -> Split -> Pipeline (false zeroes to Nans, imputed, scaled) -> Model comparison -> Best model (RF) hypertuning -> Diagnostics
+Predict the likelihood of diabetes from clinical measurements (e.g., Glucose, BMI) using a clean, leakage-safe workflow:  
+EDA → split → pipeline (false zeros → NaNs, impute, scale) → model comparison → RF hyperparameter tuning → diagnostics.
 
-Results (test set): 
+## Results (test set)
 
-Best AUC Option: Random Forest - ROC AUC Score: 0.82 - Accuracy: 0.78 - Precision: 0.7 - Recall: 0.61 - F1 Score: 0.65
-Highest Recall Option: Random Forest - ROC AUC Score: 0.82 - Accuracy: 0.74 - Precision: 0.6 - Recall: 0.74 - F1 Score: 0.67
-Validation: 5-Fold train CV AUC: 0.84 - Test AUC: 0.82. Since these are relatively close, we have limitted overfitting
+**Best AUC option — Random Forest (baseline)**  
+- ROC AUC: **0.818**  
+- Accuracy: **0.773**  
+- Precision: **0.702**  
+- Recall: **0.611**  
+- F1: **0.653**
 
-Based on our goal, we can choose different models. If we want to use this for initial screening, our tuned Random Forest model is going to be best, due to our highest recall compared to all other models. However if we want the most accurate model, our original Random Forest is going to be better
+**Higher-recall option — Random Forest (tuned)**  
+- ROC AUC: **0.817**  
+- Accuracy: **0.740**  
+- Precision: **0.606**  
+- Recall: **0.741**  
+- F1: **0.667**
 
-Methods: 
-Treated impossible 0's, such as BMI, etc, as missing, and imputed using median
-Test/train first, all imputing/scaling happens inside the pipeline
-Models: Random Forest, SVC, Logisitic Regression
-Tuning: Randomized Search CV, 5-Fold CV, scoring = "roc_auc", on Random Forest. Used n_estimators, max_depth, min_samples_split, min_samples_leaf, max_features.
-Diagnostics: Confusion matrix and ROC AUC curve for RF
+**Validation:** 5-fold CV AUC on train = **0.841**; test AUC ≈ **0.817–0.818** → small gap ⇒ **limited overfitting**.
 
-How to run: 
+> **Which to choose?**  
+> - For overall discrimination (ranking): pick **baseline RF** (slightly higher AUC).  
+> - For screening (catch more positives): pick **tuned RF** (higher recall).  
+>   You can also threshold-tune the tuned RF to hit a target recall.
+
+## Method
+
+- **Data handling:** Treat biologically implausible zeros in (Glucose, BloodPressure, SkinThickness, Insulin, BMI) as missing (NaN).
+- **Leakage-safe split:** Train/test split first; all imputation and scaling happen inside scikit-learn pipelines.
+- **Models compared:** Logistic Regression, Random Forest, SVM (`class_weight="balanced"` for imbalance).
+- **Tuning:** `RandomizedSearchCV` (5-fold Stratified CV, `scoring="roc_auc"`) over RF  
+  (`n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`).
+- **Diagnostics:** Confusion matrix and ROC curve for the chosen model.  
+
+## How to run
 
 ```bash
 pip install -r requirements.txt
