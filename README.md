@@ -55,4 +55,9 @@ data/diabetes.csv
 ### 4. Run the notebook
 jupyter notebook Project.ipynb
 
+## IN CASE OF ALL ELSE FAILING: Getting the dataset
+Download the CSV from [Plotly dataset](https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv)
+and save it at:
+`data/diabetes.csv`
+
 
