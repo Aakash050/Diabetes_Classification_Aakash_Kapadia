@@ -24,7 +24,6 @@ EDA → split → pipeline (false zeros → NaNs, impute, scale) → model compa
 > **Which to choose?**  
 > - For overall discrimination (ranking): pick **baseline RF** (slightly higher AUC).  
 > - For screening (catch more positives): pick **tuned RF** (higher recall).  
->   You can also threshold-tune the tuned RF to hit a target recall.
 
 ## Method
 
@@ -33,7 +32,13 @@ EDA → split → pipeline (false zeros → NaNs, impute, scale) → model compa
 - **Models compared:** Logistic Regression, Random Forest, SVM (`class_weight="balanced"` for imbalance).
 - **Tuning:** `RandomizedSearchCV` (5-fold Stratified CV, `scoring="roc_auc"`) over RF  
   (`n_estimators`, `max_depth`, `min_samples_split`, `min_samples_leaf`, `max_features`).
-- **Diagnostics:** Confusion matrix and ROC curve for the chosen model.  
+- **Diagnostics:** Confusion matrix and ROC curve for the chosen model.
+  
+  ### ROC Curve
+![ROC Curve](figures/roc_curve.png)
+
+### Confusion Matrix
+![Confusion Matrix](figures/confusion_matrix.png)
 
 ## How to run
 
