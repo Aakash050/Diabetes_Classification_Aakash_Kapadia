@@ -37,7 +37,22 @@ EDA → split → pipeline (false zeros → NaNs, impute, scale) → model compa
 
 ## How to run
 
+### 1. Clone the repo
 ```bash
+git clone https://github.com/Aakash050/Diabetes_Classification_Aakash_Kapadia.git
+cd Diabetes_Classification_Aakash_Kapadia
+
+### 2. Install dependencies
 pip install -r requirements.txt
-# Place dataset at data/diabetes.csv (or use a fetch script)
+
+### 3. Install dependencies
+### Recomended 
+python fetch.py
+### Or Download here and place in data folder
+https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv
+data/diabetes.csv
+
+### 4. Run the notebook
 jupyter notebook Project.ipynb
+
+
