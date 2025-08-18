@@ -1,5 +1,5 @@
 # Diabetes Prediction — Leakage-Safe ML Pipeline
-
+This project implements a leakage-safe ML pipeline to predict diabetes using the Pima Indian dataset, achieving an AUC of around 0.82.
 Predict the likelihood of diabetes from clinical measurements (e.g., Glucose, BMI) using a clean, leakage-safe workflow:  
 EDA → split → pipeline (false zeros → NaNs, impute, scale) → model comparison → RF hyperparameter tuning → diagnostics.
 
